@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Coda:800|Lobster+Two:700');
+
+/*
+font-family: 'Lobster Two', cursive;
+font-family: 'Coda', cursive;
+*/
+
 html, body {
     background: url("http://www.rainforest-alliance.org/sites/default/files/styles/1280w/theme/ra/images/about-us-header.jpg?itok=Ix67k_dG");
     background-repeat: no-repeat;
@@ -26,31 +33,38 @@ html, body {
 
 h1 {
     color: rgba(0, 0, 0, 0.6);
+    font-family: 'Lobster Two', cursive;
     text-align: center;
 }
 
 #currentGuess {
-    display: none;
     min-height: 30vh;
+    font-size: 10em;
+    line-height: 30vh;
+}
+
+.gameInfo {
+    display: none;
     margin-top: 5%;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     color: white;
-    font-size: 10em;
+    font-family: 'Coda', cursive;
     font-weight: bold;
     text-align: center;
-    line-height: 30vh;
     vertical-align: middle;
 }
 
+#remainingGuesses {
+    min-height: 30vh;
+    font-size: 10em;
+    line-height: 30vh;
+}
+
 #allGuesses {
-    display: none;
     margin-top: 5%;
     min-height: 10vh;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
     line-height: 10vh;
-    vertical-align: middle;
 }
 
 #guessList {
@@ -71,15 +85,24 @@ h1 {
 }
 
 #remainingGuesses {
-    display: none;
     min-height: 30vh;
     margin-top: 5%;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-    color: white;
     font-size: 10em;
-    font-weight: bold;
-    text-align: center;
     line-height: 30vh;
-    vertical-align: middle;
+}
+
+#wordToGuess {
+    margin: 0px auto;
+    padding: 0px;
+    display: block;
+}
+
+#wordToGuess li {
+    display: inline-block;
+    margin: 0% 1%;
+    padding: 0%;
+    color: white;
+    font-size: 4em;
+    text-align: center;
+    font-weight: bold;
 }

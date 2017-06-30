@@ -4,19 +4,22 @@ window.onload = function () {
         current: document.getElementById('currentGuess'),
         previous: document.getElementById('allGuesses'),
         remain: document.getElementById('remainingGuesses'),
+        wordHolder: document.getElementById('wordHolder')
     }
+    var wordList = ["rain", "forest", "monkey", "snake", "tree", "canopy", "deforestation"];
+    var word = wordList[Math.floor(Math.random() * wordList.length)];
+    console.log(word);
+
     // guesses user has left
     var remainingGuesses = 10;
     // # of guesses that user has made
     var counter = 0;
     // number of letters in the word
-    var space = 5;
-
 
     document.onkeyup = function (event) {
 
         var key = event.keyCode;
-        var guess = event.key.toUpperCase();
+        var guess = event.key.toLowerCase();
         var count = allGuesses.length;
 
         userGuesses.current.style.display = 'block';
@@ -55,37 +58,38 @@ window.onload = function () {
 
             }
             for (var i = 0; i < allGuesses.length; i++) {
-                if (counter + space === allGuesses.length) {
+                if (counter === allGuesses.length) {
                     userGuesses.remain.innerHTML = "You Win!";
                 }
             }
+
         }
+
+        function guessWord() {
+
+            correct = document.createElement('ul');
+            userGuesses.wordHolder.style.display = 'block';
+            userGuesses.wordHolder.innerHTML = "The word is " + word.length + " letters long.";
+
+            for (var i = 0; i < word.length; i++) {
+                correct.setAttribute('id', 'wordToGuess');
+                guessLetter = document.createElement('li');
+                guessLetter.setAttribute('class', 'guess');
+                if (word[i] !== guess) {
+                    guessLetter.innerHTML = "_";
+                } else {
+                    guessLetter.innerHTML = guess;
+                }
+
+                // geusses.push(guess);
+                wordHolder.appendChild(correct);
+                correct.appendChild(guessLetter);
+            }
+        }
+
         countGuesses();
         recordGuesses();
         showCount();
-    }
-
-
-}
-
-check = function () {
-    list.onclick = function () {
-        var geuss = (this.innerHTML);
-        this.setAttribute("class", "active");
-        this.onclick = null;
-        for (var i = 0; i < word.length; i++) {
-            if (word[i] === geuss) {
-                geusses[i].innerHTML = geuss;
-                counter += 1;
-            }
-        }
-        var j = (word.indexOf(geuss));
-        if (j === -1) {
-            lives -= 1;
-            comments();
-            animate();
-        } else {
-            comments();
-        }
+        guessWord();
     }
 }
