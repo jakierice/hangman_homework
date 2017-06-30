@@ -13,7 +13,7 @@ html, body {
     background-color: rgba(255, 255, 255, 0.6);
     margin: 2%;
     min-height: 80vh;
-    border: 2px solid rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.6);
     border-radius: 15px;
     box-shadow: 1px 1px 25px white;
 }
@@ -28,8 +28,15 @@ h1 {
 }
 
 #guesses {
+    display: none;
+    min-height: 30vh;
+    margin-top: 5%;
     background-color: rgba(0, 0, 0, 0.4);
-    border: 3px solid rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
     color: white;
-    font-size;
+    font-size: 20vh;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30vh;
+    vertical-align: middle;
 }
