@@ -55,10 +55,11 @@ h1 {
 
 #guessList {
     margin: 0px;
+    display: block;
 }
 
 #allGuesses li {
-    display: inline;
+    display: inline-block;
     margin: 0% 1%;
     padding: 0%;
     color: white;
