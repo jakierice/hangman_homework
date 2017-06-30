@@ -1,5 +1,7 @@
 html, body {
-    background: url("http://www.rainforest-alliance.org/sites/default/files/styles/1280w/theme/ra/images/about-us-header.jpg?itok=Ix67k_dG") no-repeat center center fixed;
+    background: url("http://www.rainforest-alliance.org/sites/default/files/styles/1280w/theme/ra/images/about-us-header.jpg?itok=Ix67k_dG");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     background-color: black;
     width: 100%;
     margin: 0px;
@@ -27,16 +29,40 @@ h1 {
     text-align: center;
 }
 
-#guesses {
+#currentGuess {
     display: none;
     min-height: 30vh;
     margin-top: 5%;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     color: white;
-    font-size: 20vh;
+    font-size: 10em;
     font-weight: bold;
     text-align: center;
     line-height: 30vh;
     vertical-align: middle;
+}
+
+#allGuesses {
+    display: none;
+    margin-top: 5%;
+    min-height: 10vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    line-height: 10vh;
+    vertical-align: middle;
+}
+
+#guessList {
+    margin: 0px;
+}
+
+#allGuesses li {
+    display: inline;
+    margin: 0% 1%;
+    padding: 0%;
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
