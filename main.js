@@ -76,6 +76,9 @@ window.onload = function () {
         win: function () {
             ui.remain.innerHTML = "YOU WIN!";
             ui.remain.style.fontSize = "5em";
+        },
+        restart: function() {
+
         }
     }
 
@@ -91,9 +94,23 @@ window.onload = function () {
             hangman.lose();
         }
 
-        if (correctCounter === word.length) {
-            hangman.win();
+        for (var i = 0; i < remainingGuesses; i++) {
+            if (correctCounter === word.length) {
+                hangman.win();
+            }
         }
+
+        // if (remainingGuesses >= 1) {
+        //     hangman.guess(guess);
+        //     hangman.track(guess);
+        //     remainingGuesses -= 1;
+        // } else {
+        //     hangman.lose();
+        // }
+
+        // if (correctCounter === word.length) {
+        //     hangman.win();
+        // }
     }
 
 
