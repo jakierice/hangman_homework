@@ -65,7 +65,7 @@ window.onload = function () {
             }
 
             for (var i = 0; i < allGuesses.length; i++) {
-                if (counter === chosenWord.length) {
+                if (counter === word.length) {
                     userGuesses.remain.innerHTML = "You Win!";
                     userGuesses.remain.style.fontSize = "5em";
                 }
@@ -86,7 +86,6 @@ window.onload = function () {
                 if (word[i] === guess) {
                     chosenWord[i] = guess;
                     counter += 1;
-                    console.log("count" + counter);
                     console.log(chosenWord);
                 }
             }
