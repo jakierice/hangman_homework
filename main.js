@@ -1,114 +1,110 @@
 window.onload = function () {
-    var allGuesses = [];
-    var userGuesses = {
+
+    // define user interface object for quickly calling main page elements
+    var ui = {
         current: document.getElementById('currentGuess'),
         previous: document.getElementById('allGuesses'),
         remain: document.getElementById('remainingGuesses'),
-        wordHolder: document.getElementById('wordHolder')
+        wordHolder: document.getElementById('wordHolder'),
+        // gameWord: document.getElementById('wordToGuess')
     }
+
+    // define hangman word source and word array for manipulating UI
     var wordList = ["rain", "forest", "monkey", "snake", "tree", "canopy", "deforestation"];
     var word = wordList[Math.floor(Math.random() * wordList.length)];
-    console.log(word);
     var chosenWord = new Array(word.length);
+    // set letters in chosenWord array to blank "underlined" letters
     for (var i = 0; i < chosenWord.length; i++) {
         chosenWord[i] = "_ ";
     }
-    console.log(chosenWord);
 
-    // guesses user has left
+    var allGuesses = [];
+    // define variable for total # of guesses user has, starts at 15
     var remainingGuesses = 15;
+    // define variable for # of correct guesses that user has made
+    var correctCounter = 0;
 
-    var correctGuesses = [];
-    // # of correct guesses that user has made
-    var counter = 1;
-    // number of letters in the word
+    // create Hangman Game and core functions
+    var hangman = {
+        start: function () {
+            ui.wordHolder.innerHTML = "The word is " + word.length + " letters long.";
+        },
+        guess: function (guess) {
+
+            // push every guess into storage array
+            allGuesses.push(guess);
+
+            // replace blanks in word with correctly guessed letters
+            for (var i = 0; i < word.length; i++) {
+                if (word[i] === guess && allGuesses[i] !== guess) {
+                    chosenWord[i] = guess;
+                    correctCounter += 1;
+                }
+            }
+
+            // create UL element for word to be guessed
+            var gameWord = document.createElement('ul');
+            gameWord.setAttribute('id', 'wordToGuess');
+
+            for (var i = 0; i < word.length; i++) {
+                // build word HTML element
+                var gameLetter = document.createElement('li');
+                var blankLetter = document.createTextNode(chosenWord[i]);
+
+                gameLetter.appendChild(blankLetter);
+                ui.wordHolder.appendChild(gameWord);
+                gameWord.appendChild(gameLetter);
+            }
+        },
+        track: function (guess) {
+            for (var i = 0; i < allGuesses.length; i++) {
+                ui.current.innerHTML = guess;
+            }
+            var guessedLetter = document.createElement('li');
+            guessedLetter.innerHTML = guess;
+            ui.previous.appendChild(guessedLetter);
+
+            var remainingCounter = document.createElement('div');
+            // display a countdown for the # of guesses user has left
+            ui.remain.innerHTML = remainingGuesses;
+        },
+        lose: function () {
+            ui.remain.innerHTML = "GAME OVER";
+            ui.remain.style.fontSize = "5em";
+
+        },
+        win: function () {
+            ui.remain.innerHTML = "YOU WIN!";
+            ui.remain.style.fontSize = "5em";
+        }
+    }
+
+    function playHangman(guess) {
+        hangman.start();
+        console.log(word);
+
+        if (remainingGuesses >= 1) {
+            hangman.guess(guess);
+            hangman.track(guess);
+            remainingGuesses -= 1;
+        } else {
+            hangman.lose();
+        }
+
+        if (correctCounter === word.length) {
+            hangman.win();
+        }
+    }
+
 
     document.onkeyup = function (event) {
-
         var key = event.keyCode;
         var guess = event.key.toLowerCase();
-        var count = allGuesses.length;
 
-        userGuesses.current.style.display = 'block';
-        userGuesses.previous.style.display = 'inline';
-        allGuesses.push(guess);
-
-
-        function countGuesses() {
-            // decrease number of guesses user has left
-            remainingGuesses -= 1;
+        // if key is alphanumerical, play hangman!
+        if (key >= 48 && key <= 90) {
+            playHangman(guess);
         }
-
-        function recordGuesses() {
-
-            if (allGuesses.length <= 10) {
-                for (var i = 0; i < allGuesses.length; i++) {
-                    userGuesses.current.innerHTML = guess;
-                }
-                var guessedLetter = document.createElement('li');
-                guessedLetter.innerHTML = guess;
-                userGuesses.previous.appendChild(guessedLetter);
-
-                var remainingCounter = document.createElement('div');
-            }
-        }
-
-        function showCount() {
-            userGuesses.remain.style.display = "block";
-            userGuesses.remain.innerHTML = remainingGuesses;
-            console.log(remainingGuesses);
-            if (remainingGuesses >= 1) {
-                recordGuesses();
-            } else {
-                userGuesses.remain.style.fontSize = "5em";
-                userGuesses.remain.innerHTML = "Game Over";
-            }
-
-            for (var i = 0; i < allGuesses.length; i++) {
-                if (counter === chosenWord.length) {
-                    userGuesses.remain.innerHTML = "You Win!";
-                    userGuesses.remain.style.fontSize = "5em";
-                }
-            }
-        }
-
-        function guessWord() {
-
-            correct = document.createElement('ul');
-            userGuesses.wordHolder.style.display = 'block';
-            userGuesses.wordHolder.innerHTML = "The word is " + word.length + " letters long.";
-
-            for (var i = 0; i < word.length; i++) {
-                word[i] = "_";
-            }
-
-            for (var i = 0; i < word.length; i++) {
-                if (word[i] === guess) {
-                    chosenWord[i] = guess;
-                    counter += 1;
-                    console.log("count" + counter);
-                    console.log(chosenWord);
-                }
-            }
-
-            for (var i = 0; i < word.length; i++) {
-
-                correct.setAttribute('id', 'wordToGuess');
-                guessLetter = document.createElement('li');
-                guessLetter.setAttribute('class', 'guess');
-                var blankLetter = document.createTextNode(chosenWord[i]);
-                guessLetter.appendChild(blankLetter);
-
-                wordHolder.appendChild(correct);
-                correct.appendChild(guessLetter);
-            }
-
-
-        }
-
-        countGuesses();
-        // recordGuesses();
-        showCount();
-        guessWord();
     }
+
 }

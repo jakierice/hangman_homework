@@ -37,6 +37,13 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    color: white;
+    font-family: 'Coda', cursive;
+    text-align: center;
+    font-weight: normal;
+}
+
 #currentGuess {
     min-height: 30vh;
     font-size: 10em;
@@ -44,7 +51,7 @@ h1 {
 }
 
 .gameInfo {
-    display: none;
+    /*display: none;*/
     margin-top: 5%;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
